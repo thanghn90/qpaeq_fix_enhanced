@@ -28,7 +28,7 @@ Reboot to take effect (yes, not just invoke <code>pulseaudio --kill</code> and <
 
 2. Once rebooted, run qpaeq to make some change to the equalizer and save it as a test preset, and then start playing some sound/music via an audio player. If the changes to equalizer does not make any effect, chances are your audio player still point to the built-in output audio "sink". You need to change it to the equalized "sink". Click on the PulseAudio System Tray --> Playback Streams --> <your_audio_player> --> Select "FFT based equalizer on..." instead of the default "Build-in..."
 
-
+![alt text](https://github.com/thanghn90/qpaeq_fix_enhanced/blob/main/change_output_sink_of_app.png)
 
 I believe a full reboot in step 1 above should keep you away from this headache, as I do have to make this change when I only kill and start pulseaudio process. Rest assured, I don't have to change the output sink of every audio player, so I think a reboot should fix this.
 
