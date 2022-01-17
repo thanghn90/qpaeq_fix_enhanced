@@ -370,7 +370,7 @@ class SliderArraySub(QtWidgets.QWidget):
         #self.setStyleSheet('font-family: monospace;'+outline%('blue'))
         qt=QtCore.Qt
         #self.layout().setHorizontalSpacing(1)
-        def add_slider(slider,label, c):
+        def add_slider(slider,label,vlabel, c): # Thang Ha
             self.layout().addWidget(slider,0,c,qt.AlignHCenter)
             self.layout().addWidget(label,1,c,qt.AlignHCenter)
             self.layout().addWidget(vlabel,2,c,qt.AlignHCenter) # Thang Ha, 20220115: add value label widget
@@ -379,7 +379,7 @@ class SliderArraySub(QtWidgets.QWidget):
             slider=QtWidgets.QSlider(QtCore.Qt.Vertical,self)
             slider.setMinimumHeight(400) # Thang Ha, 20220115: make slider more elongated
             label=SliderLabel(slider_label,filter_state,self)
-            vlabel=QtGui.QLabel("") # Thang Ha, 20220115: create a dummy label
+            vlabel=QtWidgets.QLabel("") # Thang Ha, 20220115: create a dummy label
             slider.setRange(-60,60) # Thang Ha: -30db to +30db, 0.5db increment. Old range: (-1000,2000)
             slider.setSingleStep(1)
             return (slider,label,vlabel)
@@ -389,6 +389,7 @@ class SliderArraySub(QtWidgets.QWidget):
             slider,label,vlabel=create_slider(self.hz2label(hz)) # Thang Ha, 20220115
             self.slider[i]=slider
             #slider.setStyleSheet('font-family: monospace;'+outline%('red',))
+            self.label[i]=label
             self.vlabel[i]=vlabel # Thang Ha, 20220115
             c=i+1
             add_slider(slider,label,vlabel,i+1) # Thang Ha, 20220115
