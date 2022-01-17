@@ -5,7 +5,7 @@ There are many other superior alternatives to qpaeq (pulseaudio-equalizer defaul
 ![alt text](https://github.com/thanghn90/qpaeq_fix_enhanced/blob/main/qpaeq_fixed_enhanced.png)
 - Added a dB-gain label to each slider
 - Increase default slider height to make the sliders longer
-- Change the slider ranges to be between -30dB and +30dB
+- Change the slider ranges to be between -30dB and +30dB, with 0.5dB increment.
 
 # Instruction
 Very simple: just download the qpaeq from this repositories (under the correct version directory) and replace it under your /usr/bin/ using sudo. You may need to change file permission to executable afterward:
@@ -27,13 +27,15 @@ Then save it (Ctrl-O) and exit (Ctrl-X).
 
 Reboot to take effect (yes, not just invoke <code>pulseaudio --kill</code> and <code>pulseaudio --start</code>, but a full reboot).
 
+Instruction modified from source: https://askubuntu.com/questions/1292040/qpaeq-no-module-named-dbus
+
 2. Once rebooted, run qpaeq to make some change to the equalizer and save it as a test preset, and then start playing some sound/music via an audio player. If the changes to equalizer does not make any effect, chances are your audio player still point to the built-in output audio "sink". You need to change it to the equalized "sink". Click on the PulseAudio System Tray --> Playback Streams --> <your_audio_player> --> Select "FFT based equalizer on..." instead of the default "Build-in..."
 
 ![alt text](https://github.com/thanghn90/qpaeq_fix_enhanced/blob/main/change_output_sink_of_app.png)
 
 I believe a full reboot in step 1 above should keep you away from this headache, as I do have to make this change when I only kill and start pulseaudio process. Rest assured, I don't have to change the output sink of every audio player, so I think a reboot should fix this.
 
-Currently, I can only support qpaeq version of Qt4, pulseaudio-equalizer 1:11.1-1ubuntu7.11 and version of Qt5 on the official pulseaudio github repo (https://github.com/pulseaudio/pulseaudio/blob/master/src/utils/qpaeq). If both doesn't work for you, send me your qpaeq and I'll make the needed changes.
+Currently, I can only support qpaeq version of Qt4, python 2, pulseaudio-equalizer 1:11.1-1ubuntu7.11 and version of Qt5, python 3, on the official pulseaudio github repo (https://github.com/pulseaudio/pulseaudio/blob/master/src/utils/qpaeq). If both doesn't work for you, send me your qpaeq and I'll make the needed changes.
   
 # Caveats
 For some reason, all equalizers (qpaeq, pulseeffects, and ladspa) yield the same stuttering issue for me when I change the volume of individual app. It's a good practice to change the volume of the app while keeping the master volume at maximum, since reducing the source's volume will help prevent clipping from happening in case the equalizer amplifies the signal too much. I guess it's an inherent issue with pulseaudio equalizer framework in general. A workaround is to change the preamp value of qpaeq, but that means everytime you want to change the volume, you have to open qpaeq. PEACE audio equalizer in Windows does not have this issue, though.
@@ -47,5 +49,7 @@ The equation I used to convert logarithmic coefficients (dbGains) into linear co
 <code>linear_coefficient = 10^(dbGain/20)</code>
 
 (mathematically, it should be /40, but my test shows that /20 makes it much closer to the result of pulseeffects and Peace audio equalizer in Windows. Beside, pulseaudio-equalizer is a fft-based filter, so the equation should be different from biquad filters)
+
+The default slider increment of 1 over range [-1000,2000] is absurd, so I changed the slider range to [-30dB,30dB] with 0.5dB step.
 
 In case you want to modify the code by yourself (maybe because no versions of qpaeq in this repository work with your Linux distro), simply search for the lines of codes containing the word <code>Thang</code> in any of the qpaeq versions in this repository and then start modify your qpaeq accordingly.
