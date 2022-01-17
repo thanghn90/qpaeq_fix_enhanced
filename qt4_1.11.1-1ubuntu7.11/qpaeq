@@ -383,7 +383,7 @@ class SliderArraySub(QtGui.QWidget):
             vlabel=QtGui.QLabel("") # Thang Ha, 20220115: create a dummy label
             slider.setRange(-60,60) # Thang Ha: -30db to +30db, 0.5db increment. Old range: (-1000,2000)
             slider.setSingleStep(1)
-            return (slider,label,vlabel)
+            return (slider,label,vlabel) # Thang Ha
         self.preamp_slider,self.preamp_label,self.preamp_vlabel=create_slider('Preamp') # Thang Ha, 20220115
         add_slider(self.preamp_slider,self.preamp_label,self.preamp_vlabel,0) # Thang Ha, 20220115
         for i,hz in enumerate(self.filter_state.frequencies):
