@@ -371,7 +371,7 @@ class SliderArraySub(QtGui.QWidget):
         #self.setStyleSheet('font-family: monospace;'+outline%('blue'))
         qt=QtCore.Qt
         #self.layout().setHorizontalSpacing(1)
-        def add_slider(slider,label,vlabel, c):
+        def add_slider(slider,label,vlabel, c): # Thang Ha
             self.layout().addWidget(slider,0,c,qt.AlignHCenter)
             self.layout().addWidget(label,1,c,qt.AlignHCenter)
             self.layout().addWidget(vlabel,2,c,qt.AlignHCenter) # Thang Ha, 20220115: add value label widget
